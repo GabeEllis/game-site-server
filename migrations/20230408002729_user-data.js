@@ -13,6 +13,8 @@ exports.up = function (knex) {
       table.increments("id");
       table.integer("user_id").unsigned();
       table.string("theme").notNullable();
+      table.string("name").notNullable();
+      table.string("elo").notNullable();
       table
         .foreign("user_id")
         .references("id")

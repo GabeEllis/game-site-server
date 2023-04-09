@@ -96,7 +96,7 @@ router.post("/register", async (req, res) => {
   const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET_KEY);
 
   res.json({
-    message: "Successfully logged in",
+    message: "Successfully signed up",
     token,
   });
 });

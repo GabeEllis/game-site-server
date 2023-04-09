@@ -5,12 +5,17 @@ let usersData = [
   {
     id: 1,
     email: "gabeellis830@gmail.com",
-    password: "123",
+    password: "Password1!",
   },
   {
     id: 2,
-    email: "nknill@brainstation.io",
-    password: "123",
+    email: "marco@brainstation.io",
+    password: "Password2!",
+  },
+  {
+    id: 3,
+    email: "roza@brainstation.io",
+    password: "Password3!",
   },
 ];
 
@@ -25,11 +30,21 @@ usersData = usersData.map((user) => ({
 const preferencesData = [
   {
     user_id: 1,
-    theme: "dark",
+    theme: "option1",
+    name: "GabeEllis",
+    elo: "1732",
   },
   {
     user_id: 2,
-    theme: "light",
+    theme: "option2",
+    name: "Marco",
+    elo: "1121",
+  },
+  {
+    user_id: 3,
+    theme: "option3",
+    name: "Roza",
+    elo: "785",
   },
 ];
 

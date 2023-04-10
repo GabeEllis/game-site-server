@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
+const uniqid = require("uniqid");
 const knex = require("knex")(require("../knexfile"));
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
@@ -61,12 +62,10 @@ router.post("/login", (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, name, elo } = req.body;
 
-  if (!email || !password) {
-    return res
-      .status(400)
-      .json({ error: "Registration requires email and password fields" });
+  if (!email || !password || !name || !elo) {
+    return res.status(400).json({ error: "Registration requires all fields" });
   }
 
   const foundUsers = await knex("user").where({ email: email });
@@ -87,13 +86,31 @@ router.post("/register", async (req, res) => {
     email,
     password: hashedPassword,
   });
+
   const newUserId = newUserIds[0];
-
   const newUsers = await knex("user").where({ id: newUserId });
-
   const newUser = newUsers[0];
-
   const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET_KEY);
+
+  const newUserData = {
+    id: newUser.id,
+    user_id: newUser.id,
+    name: name,
+    elo: elo,
+    theme: "option1",
+  };
+
+  knex("preferences")
+    .insert(newUserData)
+    .then(() => {
+      return knex("preferences").where("id", newUserData.id).first();
+    })
+    .catch((error) => {
+      return res.status(400).json({
+        message: "There was an issue with the request",
+        error,
+      });
+    });
 
   res.json({
     message: "Successfully signed up",

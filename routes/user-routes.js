@@ -6,15 +6,6 @@ const knex = require("knex")(require("../knexfile"));
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
-/**
- * Request:
- *         - email
- *         - password
- * Response:
- *         - 200 { token: jwtToken } -> how to generate the JWT? ✅
- *         - 401 email and password don't match a user ✅
- *         - 400 email or password are missing ✅
- */
 router.post("/login", (req, res) => {
   if (!req.body.email || !req.body.password) {
     return res.status(400).json({
@@ -22,10 +13,6 @@ router.post("/login", (req, res) => {
     });
   }
 
-  // Instead of checking the array
-  // let's find the user by their email
-  // If we find a user by their email,
-  // use bcrypt to validate their password
   knex("user")
     .where({ email: req.body.email })
     .then((users) => {
@@ -48,10 +35,6 @@ router.post("/login", (req, res) => {
         });
       }
 
-      // We have valid credentials
-      // - 200 { token: jwtToken } -> how to generate the JWT?
-      // Install jsonwebtoken, jwt.sign( payloadObject, SECRET_KEY);
-      // Respond with the created JWT
       const token = jwt.sign({ id: foundUser.id }, process.env.JWT_SECRET_KEY);
 
       res.json({

@@ -30,19 +30,19 @@ usersData = usersData.map((user) => ({
 const preferencesData = [
   {
     user_id: 1,
-    theme: "option1",
+    theme: "default",
     name: "GabeEllis",
     elo: "1732",
   },
   {
     user_id: 2,
-    theme: "option2",
+    theme: "rust",
     name: "Marco",
     elo: "1121",
   },
   {
     user_id: 3,
-    theme: "option3",
+    theme: "marine",
     name: "Roza",
     elo: "785",
   },

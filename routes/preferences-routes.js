@@ -14,6 +14,7 @@ router.get("/", authorize, (req, res) => {
 
 router.put("/:id", (req, res) => {
   // Check for an empty field in the PUT body request.
+  console.log(req.body);
   if (!req.body.name || !req.body.elo || !req.body.theme) {
     res.status(400).json({
       message: "All fields are required.  Please check your entries.",
@@ -24,10 +25,7 @@ router.put("/:id", (req, res) => {
     .where({ user_id: req.params.id })
     .then(() => {
       res.status(200).send(`User with id: ${req.params.id} has been updated`);
-    })
-    .catch((err) =>
-      res.status(400).send(`Error updating user data ${req.params.id} ${err}`)
-    );
+    });
 });
 
 module.exports = router;

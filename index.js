@@ -9,10 +9,12 @@ app.use(express.json());
 
 const userRoutes = require("./routes/user-routes");
 const preferenceRoutes = require("./routes/preferences-routes");
+const themeRoutes = require("./routes/theme-routes");
 
 // Create some routes: POST /login, POST /register, GET /user-profile
 app.use("/users", userRoutes);
 app.use("/preferences", preferenceRoutes);
+app.use("/themes", themeRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`);

@@ -19,6 +19,3 @@ app.use("/themes", themeRoutes);
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`);
 });
-
-// Exports the Express API for vercel.
-module.exports = app;
